@@ -6,16 +6,25 @@ import java.util.Map;
 
 public class ModelFieldUtil {
 	
-	public Map<String, Object> getAllField(Class<?> clazz, Object obj){
+	public static Map<String, Object> getAllFieldValue(Object obj){
 		Map<String, Object> map = new HashMap<String, Object>();
-		Field[] fields = clazz.getDeclaredFields();
+		Field[] fields = obj.getClass().getDeclaredFields();
 		
 		
 		for(Field f : fields) {
-			//map.put(f.getName(), )
+			try {
+				map.put(f.getName(), f.get(obj));
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return map;
+	}
+	
+	public void setFieldValue() {
+		
 	}
 	
 }
