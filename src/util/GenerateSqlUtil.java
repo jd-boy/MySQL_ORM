@@ -1,13 +1,15 @@
 package util;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class GenerateSqlUtil {
 	
 	private Method method;
 	private Object[] args;
+	private Map<String, Object> map;
 	
 	public GenerateSqlUtil(Method method, Object[] args) {
 		this.method = method;
@@ -31,19 +33,23 @@ public class GenerateSqlUtil {
 		
 		StringBuffer sb = new StringBuffer();
 		
-		Annotation[][] annotations = null;
-		
-		Parameter[] p = method.getParameters();
-		for(Parameter pp : p) {
-			System.out.println(pp.getAnnotation(annotation.Param.class).value());
-		}
-		/*annotations = method.getParameterAnnotations();
-		System.out.println(annotations[0][0].annotationType().getName());
-		for(Annotation[] ann : annotations) {
-			for(Annotation a : ann) {
-					System.out.println(a.annotationType());
+		Parameter[] parameter = method.getParameters();
+		for(int i = 0; i < parameter.length; i++) {
+			
+			if(parameter[i].getAnnotation(annotation.Param.class) != null) {
+				if(ModelFieldUtil.isPrimitive(parameter[i].getParameterizedType())) {
+					map.put(parameter[i].getAnnotation(annotation.Param.class).value(), args[i]);
+				} else {
+					Map<String, Object> m = ModelFieldUtil.getAllFieldValue(args);
+					for(Entry<String, Object> entry : m.entrySet()) {
+						if(!map.containsKey(entry.getKey())) {
+							map.put(entry.getKey(), entry.getValue());
+						}
+					}
+				}
 			}
-		}*/
+			//System.out.println(parameter[i].getAnnotation(annotation.Param.class).value() + ":" + args[i]);
+		}
 			
 		return null;
 	}
