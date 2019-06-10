@@ -1,6 +1,8 @@
 package util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 public class GenerateSqlUtil {
 	
@@ -23,21 +25,26 @@ public class GenerateSqlUtil {
 
 	public String getValues() {
 		
-		StringBuffer sb = new StringBuffer();
-		
-		Class<?>[] clazzs = null;
-		
 		if(method.getParameterCount() == 0) {
 			return null;
 		}
 		
-		if(args.length == 1) {
-			
-			clazzs = method.getParameterTypes();
-			
-			
-		}
+		StringBuffer sb = new StringBuffer();
 		
+		Annotation[][] annotations = null;
+		
+		Parameter[] p = method.getParameters();
+		for(Parameter pp : p) {
+			System.out.println(pp.getAnnotation(annotation.Param.class).value());
+		}
+		/*annotations = method.getParameterAnnotations();
+		System.out.println(annotations[0][0].annotationType().getName());
+		for(Annotation[] ann : annotations) {
+			for(Annotation a : ann) {
+					System.out.println(a.annotationType());
+			}
+		}*/
+			
 		return null;
 	}
 

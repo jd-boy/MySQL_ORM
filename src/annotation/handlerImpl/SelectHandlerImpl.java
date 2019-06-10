@@ -3,12 +3,13 @@ package annotation.handlerImpl;
 import java.lang.reflect.Method;
 
 import annotation.handler.AnnotationHandler;
+import util.GenerateSqlUtil;
 
 public class SelectHandlerImpl implements AnnotationHandler {
 
 	@Override
 	public String getResult(Method method, Object[] args) {
-		// TODO Auto-generated method stub
+		new GenerateSqlUtil(method, args).getValues();
 		return null;
 	}
 
