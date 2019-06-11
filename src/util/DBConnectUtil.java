@@ -1,4 +1,4 @@
-package connect;
+package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,9 +7,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import util.ConfigUtil;
-
-public class DBConnect {
+public class DBConnectUtil {
 	
 	private ConfigUtil configUtil = null;
 	
@@ -21,7 +19,7 @@ public class DBConnect {
 	private String user;
 	private String password;
 	
-	public DBConnect() {
+	public DBConnectUtil() {
 		configUtil = new ConfigUtil();
 		
 		try {
@@ -44,15 +42,15 @@ public class DBConnect {
 		}
 	}
 
-	public Connection getConn() {
+	public Connection getConnection() {
 		return conn;
 	}
 
-	public PreparedStatement getPrst() {
+	public PreparedStatement getPreparedStatement() {
 		return prst;
 	}
 
-	public ResultSet getRes() {
+	public ResultSet getResultSet() {
 		return res;
 	}
 	
