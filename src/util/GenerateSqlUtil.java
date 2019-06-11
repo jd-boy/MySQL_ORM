@@ -59,10 +59,9 @@ public class GenerateSqlUtil {
 		}
 		
 		for(Entry<String, Object> entry : map.entrySet()) {
-			sql = sql.replaceAll("\\#\\{"+entry.getKey()+"\\}", "`"+entry.getValue().toString()+"`");
+			sql = sql.replaceAll("\\#\\{"+entry.getKey()+"\\}", entry.getValue().toString());
 		}
 		sql += ";";
-		System.out.println(sql);
-		return null;
+		return sql;
 	}
 }

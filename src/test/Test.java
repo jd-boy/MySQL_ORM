@@ -13,7 +13,7 @@ public class Test {
 		User u = new User();
 		
 		
-		m.f(23, u);
+		m.f(1);
 		
 		
 	}

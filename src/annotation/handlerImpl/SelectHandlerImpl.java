@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import annotation.handler.AnnotationHandler;
@@ -13,7 +14,7 @@ import util.GenerateSqlUtil;
 public class SelectHandlerImpl implements AnnotationHandler {
 
 	@Override
-	public String getResult(Method method, Object[] args) {
+	public Object getResult(Method method, Object[] args) {
 		
 		GenerateSqlUtil generateSqlUtil = new GenerateSqlUtil(method, args);
 		String sql = generateSqlUtil.getSpl();
@@ -25,6 +26,10 @@ public class SelectHandlerImpl implements AnnotationHandler {
 		try {
 			PreparedStatement pre = con.prepareStatement(sql);
 			result = pre.executeQuery();
+			ResultSetMetaData rsmd = result.getMetaData();
+			for(int i = 1; i <= rsmd.getColumnCount(); i++) {
+				System.out.println(rsmd.getColumnName(i));
+			}
 			if(result.next()) {
 				
 			} else {

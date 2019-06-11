@@ -1,5 +1,6 @@
-/util/
 /mapper/
 /test/
 /annotation/
-/connect/
+/util/
+/model/
+/proxy/
