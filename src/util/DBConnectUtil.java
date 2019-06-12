@@ -2,18 +2,13 @@ package util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.PreparedStatement;
 
 public class DBConnectUtil {
 	
 	private ConfigUtil configUtil = null;
 	
 	private Connection conn = null;
-	private PreparedStatement prst = null;
-	private ResultSet res = null;
 	
 	private String url;
 	private String user;
@@ -46,32 +41,4 @@ public class DBConnectUtil {
 		return conn;
 	}
 
-	public PreparedStatement getPreparedStatement() {
-		return prst;
-	}
-
-	public ResultSet getResultSet() {
-		return res;
-	}
-	
-	public void close() {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			//e.printStackTrace();
-			System.err.println("类DBConnect：Connection关闭异常");
-		}
-		try {
-			prst.close();
-		} catch (SQLException e) {
-			//e.printStackTrace();
-			System.err.println("类DBConnect：PreparedStatement关闭异常");
-		}
-		try {
-			res.close();
-		} catch (SQLException e) {
-			//e.printStackTrace();
-			System.err.println("类DBConnect：ResultSet关闭异常");
-		}
-	}
 }

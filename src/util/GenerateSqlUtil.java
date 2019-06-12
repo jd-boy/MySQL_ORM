@@ -28,7 +28,7 @@ public class GenerateSqlUtil {
 		for(int i = 0; i < parameter.length; i++) {
 			
 			if(parameter[i].getAnnotation(annotation.Param.class) != null) {
-				if(ModelFieldUtil.isPrimitive(parameter[i].getParameterizedType())) {
+				if(ModelFieldUtil.isType(parameter[i].getParameterizedType()) < ModelFieldUtil.TYPE_BASE) {
 					map.put(parameter[i].getAnnotation(annotation.Param.class).value(), args[i]);
 				} else {
 					Map<String, Object> m = ModelFieldUtil.getAllFieldValue(args[i]);

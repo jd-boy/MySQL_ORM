@@ -12,7 +12,6 @@ public class Test {
 		
 		User u = new User();
 		
-		
 		m.f(1);
 		
 		
