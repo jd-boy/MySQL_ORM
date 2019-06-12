@@ -16,7 +16,7 @@ public class GenerateSqlUtil {
 		this.args = args;
 	}
 	
-	private Map<String, Object> getValues() {
+	public Map<String, Object> getValues() {
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -28,7 +28,7 @@ public class GenerateSqlUtil {
 		for(int i = 0; i < parameter.length; i++) {
 			
 			if(parameter[i].getAnnotation(annotation.Param.class) != null) {
-				if(ModelFieldUtil.isType(parameter[i].getParameterizedType()) < ModelFieldUtil.TYPE_BASE) {
+				if(TypeUtil.isType(parameter[i].getParameterizedType()) < TypeUtil.TYPE_BASE) {
 					map.put(parameter[i].getAnnotation(annotation.Param.class).value(), args[i]);
 				} else {
 					Map<String, Object> m = ModelFieldUtil.getAllFieldValue(args[i]);
@@ -50,7 +50,7 @@ public class GenerateSqlUtil {
 		
 		Map<String, Object> map = getValues();
 		
-		String[] sqls = method.getAnnotation(annotation.Select.class).value();
+		String[] sqls = method.getAnnotation(annotation.Insert.class).value();
 		
 		String sql = "";
 		

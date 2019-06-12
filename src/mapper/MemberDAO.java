@@ -1,13 +1,13 @@
 package mapper;
 
+import annotation.Insert;
 import annotation.Mapper;
 import annotation.Param;
-import annotation.Select;
 import model.User;
 
 @Mapper
 public interface MemberDAO {
 	
-	@Select({"Select * FROM user WHERE id = #{id}"})
-	public void f(@Param("id") int a);
+	@Insert({"INSERT INTO user (id, name, age, date) VALUES (#{id}, #{name}, #{age}, #{date})"})
+	public int f(@Param("id") User user);
 }
