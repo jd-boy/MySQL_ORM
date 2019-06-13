@@ -78,14 +78,14 @@ public class SelectHandlerImpl implements AnnotationHandler {
 		return null;
 	}
 	
-	private List<?> listType(Class clazz){
+	private <T> List listType(Class clazz){
 		ParameterizedType parameterizedType = (ParameterizedType) method.getGenericReturnType();
 		Type[] types = parameterizedType.getActualTypeArguments();
-		List<?> list = null;
+		List<T> list = null;
 		
 		try {
-			
-			list = (List<?>) clazz.getConstructor(null).newInstance(null);
+			//list = (List<T>) parameterizedType.getClass().getConstructor(null).newInstance(null);
+			list = (List<T>) clazz.getConstructor(null).newInstance(null);
 			
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e1) {
@@ -97,19 +97,12 @@ public class SelectHandlerImpl implements AnnotationHandler {
 			
 			while(result.next()) {
 				
-				Map<String , Object> map = new HashMap<>();
+				Map<String, Object> map = new HashMap<>();
 				for(int i = 1; i <= rsmd.getColumnCount(); i++) {
 					map.put(rsmd.getColumnName(i), result.getObject(i));
 				}
 				
-				try {
-					ModelFieldUtil.setFieldValue(map, types[0]);
-				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
+				list.add((T) ModelFieldUtil.setFieldValue(map, types[0]));
 			}
 			
 		} catch (SQLException e) {
@@ -122,10 +115,6 @@ public class SelectHandlerImpl implements AnnotationHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		for(Object u : list) {
-			
 		}
 		
 		return list;

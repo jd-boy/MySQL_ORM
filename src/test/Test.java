@@ -12,7 +12,11 @@ public class Test {
 		
 		User u = new User();
 		
-		m.select(1);
+		System.out.println(m.insert(u));
+		
+		/*for(User user : m.select(5)) {
+			System.out.println(user.getName());
+		}*/
 		
 	}
 	

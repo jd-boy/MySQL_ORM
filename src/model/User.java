@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class User {
 	
-	private Integer id = 5;
-	private String name = "454";
-	private Integer age = 100;
+	private Integer id = 6;
+	private String name = "fe4";
+	private Integer age = 10;
 	private Date date = new Date();
 	
 	public Integer getId() {
@@ -32,5 +32,10 @@ public class User {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", age=" + age + ", date=" + date + "]";
 	}
 }

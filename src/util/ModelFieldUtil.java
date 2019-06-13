@@ -21,7 +21,7 @@ public class ModelFieldUtil {
 	 * @throws IllegalAccessException 
 	 * @throws InstantiationException 
 	 */
-	public static Object setFieldValue(Map<String, Object> values, Type type) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+	public static Object setFieldValue(Map<String, Object> values, Type type) {
 		
 		Class clazz = null;
 		
@@ -32,13 +32,19 @@ public class ModelFieldUtil {
 			e.printStackTrace();
 		}
 		
-		Object obj = clazz.newInstance();
+		Object obj = null;
 		
-		Field[] fields = clazz.getDeclaredFields();
-		
-		for(Field field : fields) {
-			field.setAccessible(true);
-			field.set(obj, values.get(field.getName()));
+		try {
+			obj = clazz.newInstance();
+			Field[] fields = clazz.getDeclaredFields();
+			
+			for(Field field : fields) {
+				field.setAccessible(true);
+				field.set(obj, values.get(field.getName()));
+			}
+		} catch (InstantiationException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return obj;
