@@ -15,7 +15,7 @@ import model.User;
 public interface MemberDAO {
 	
 	@Insert({"INSERT INTO user (id, name, age, date) VALUES (#{id}, #{name}, #{age}, #{date})"})
-	public int insert(@Param("id") User user);
+	public int insert(User user);
 	
 	@Select({"SELECT * FROM user WHERE id = #{id}"})
 	public LinkedList<User> select(@Param("id") int id);

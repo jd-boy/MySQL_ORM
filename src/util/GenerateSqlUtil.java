@@ -70,16 +70,15 @@ public class GenerateSqlUtil {
 			return ;
 		}
 		
+		Parameter[] parameters = method.getParameters();
 		map = new TreeMap<>();
-		
 		Map<String, Object> m = new HashMap<>();
 		
-		Parameter[] parameter = method.getParameters();
-		for(int i = 0; i < parameter.length; i++) {
+		for(int i = 0; i < parameters.length; i++) {
 			
-			if(parameter[i].getAnnotation(annotation.Param.class) != null) {
-				if(TypeUtil.isType(parameter[i].getParameterizedType()) < TypeUtil.TYPE_BASE) {
-					m.put(parameter[i].getAnnotation(annotation.Param.class).value(), args[i]);
+			if(parameters[i].getAnnotation(annotation.Param.class) != null) {
+				if(TypeUtil.isType(parameters[i].getParameterizedType()) < TypeUtil.TYPE_BASE) {
+					m.put(parameters[i].getAnnotation(annotation.Param.class).value(), args[i]);
 				} else {
 					Map<String, Object> mm = ModelFieldUtil.getAllFieldValue(args[i]);
 					for(Entry<String, Object> entry : mm.entrySet()) {
@@ -88,6 +87,16 @@ public class GenerateSqlUtil {
 						}
 					}
 				}
+			} else if(TypeUtil.isType(parameters[i].getParameterizedType()) == TypeUtil.TYPE_OTHER) {
+				Map<String, Object> mm = ModelFieldUtil.getAllFieldValue(args[i]);
+				for(Entry<String, Object> entry : mm.entrySet()) {
+					if(!m.containsKey(entry.getKey())) {
+						m.put(entry.getKey(), entry.getValue());
+					}
+				}
+			} else if(parameters.length == 1 && 
+					TypeUtil.isType(parameters[i].getParameterizedType()) < TypeUtil.TYPE_BASE) {
+				
 			}
 		}
 		

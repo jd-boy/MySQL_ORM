@@ -12,9 +12,9 @@ public class Test {
 		
 		User u = new User();
 		
-		//System.out.println(m.insert(u));
+		System.out.println(m.insert(u));
 		
-		System.out.println(m.delete(5));
+		//System.out.println(m.delete(5));
 		
 		/*for(User user : m.select(5)) {
 			System.out.println(user.getName());
