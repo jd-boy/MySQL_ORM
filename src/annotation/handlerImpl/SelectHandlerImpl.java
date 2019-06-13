@@ -2,19 +2,26 @@ package annotation.handlerImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import annotation.handler.AnnotationHandler;
+import model.User;
 import util.GenerateSqlUtil;
+import util.ModelFieldUtil;
 import util.TypeUtil;
 
 public class SelectHandlerImpl implements AnnotationHandler {
+	
+	private Method method = null;
+	private Object[] args;
 	
 	private ResultSet result = null;
 	private ResultSetMetaData rsmd = null;
@@ -25,12 +32,14 @@ public class SelectHandlerImpl implements AnnotationHandler {
 	@Override
 	public Object getResult(Method method, Object[] args) {
 		
+		this.method = method;
+		this.args = args;
+		
 		GenerateSqlUtil generateSqlUtil = new GenerateSqlUtil(method, args);
 		
 		try {
 			result = generateSqlUtil.getPreparedStatement().executeQuery();
 			rsmd = result.getMetaData();
-			
 			
 			if(TypeUtil.isType(method.getReturnType()) < TypeUtil.TYPE_BASE) {
 				return primitiveType();
@@ -69,9 +78,56 @@ public class SelectHandlerImpl implements AnnotationHandler {
 		return null;
 	}
 	
-	private List<?> listType(Class<?> clazz){
+	private List<?> listType(Class clazz){
+		ParameterizedType parameterizedType = (ParameterizedType) method.getGenericReturnType();
+		Type[] types = parameterizedType.getActualTypeArguments();
 		List<?> list = null;
+		
+		try {
+			
+			list = (List<?>) clazz.getConstructor(null).newInstance(null);
+			
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			
+			while(result.next()) {
 				
+				Map<String , Object> map = new HashMap<>();
+				for(int i = 1; i <= rsmd.getColumnCount(); i++) {
+					map.put(rsmd.getColumnName(i), result.getObject(i));
+				}
+				
+				try {
+					ModelFieldUtil.setFieldValue(map, types[0]);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				result.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		for(Object u : list) {
+			
+		}
+		
 		return list;
 	}
 

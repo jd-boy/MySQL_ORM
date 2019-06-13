@@ -16,5 +16,5 @@ public interface MemberDAO {
 	public int insert(@Param("id") User user);
 	
 	@Select({"SELECT * FROM user WHERE id = #{id}"})
-	public LinkedList select(@Param("id") int id);
+	public LinkedList<User> select(@Param("id") int id);
 }
