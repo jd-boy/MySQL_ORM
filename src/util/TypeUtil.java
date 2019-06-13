@@ -19,8 +19,8 @@ public class TypeUtil {
 	public static int TYPE_float = 9;
 	public static int TYPE_Float = 10;
 	public static int TYPE_BigDecimal = 11;
-	public static int TYPE_BASE = 12;
-	public static int TYPE_Date = 13;
+	public static int TYPE_Date = 12;
+	public static int TYPE_BASE = 13;
 	public static int TYPE_List = 14;
 	public static int TYPE_OTHER = 15;
 	

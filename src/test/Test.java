@@ -12,8 +12,7 @@ public class Test {
 		
 		User u = new User();
 		
-		m.f(u);
-		
+		m.select(1);
 		
 	}
 	

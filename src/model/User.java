@@ -27,4 +27,10 @@ public class User {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 }
