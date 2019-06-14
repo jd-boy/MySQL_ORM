@@ -6,7 +6,7 @@ public class User {
 	
 	private Integer id = 1;
 	private String name = "fe4";
-	private Integer age = 10;
+	private Integer age = 60;
 	private Date date = new Date();
 	
 	public Integer getId() {

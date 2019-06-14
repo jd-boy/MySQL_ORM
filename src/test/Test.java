@@ -13,11 +13,11 @@ public class Test {
 		User u = new User();
 		
 		//System.out.println(m.insert(u));
-		System.out.println(m.update(u));
-		//System.out.println(m.delete(5));
-		/*for(User user : m.select(1)) {
+		//System.out.println(m.update(u));
+		//System.out.println(m.delete(1));
+		for(User user : m.select(7)) {
 			System.out.println(user.getName());
-		}*/
+		}
 		
 	}
 	

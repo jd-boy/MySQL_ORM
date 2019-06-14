@@ -98,8 +98,15 @@ public class GenerateSqlUtil {
 			}
 		}
 		
+		int index = -1;
+		
 		for(Entry<String, Object> entry : m.entrySet()) {
-			map.put(sql.indexOf("#{"+entry.getKey()+"}"), entry);
+			
+			index = sql.indexOf("#{"+entry.getKey()+"}");
+			
+			if(index != -1) {
+				map.put(index, entry);
+			}
 		}
 	}
 	
