@@ -1,6 +1,5 @@
 package util;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.sql.Connection;
@@ -26,7 +25,6 @@ public class GenerateSqlUtil {
 	public GenerateSqlUtil(Method method, Object[] args) {
 		this.method = method;
 		this.args = args;
-		
 		setSql();
 		setValues();
 		
@@ -96,7 +94,7 @@ public class GenerateSqlUtil {
 				}
 			} else if(parameters.length == 1 && 
 					TypeUtil.isType(parameters[i].getParameterizedType()) < TypeUtil.TYPE_BASE) {
-				
+				m.put(parameters[i].getName(), args[i]);
 			}
 		}
 		

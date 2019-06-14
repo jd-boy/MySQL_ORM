@@ -117,6 +117,10 @@ public class SelectHandlerImpl implements AnnotationHandler {
 			}
 		}
 		
+		if(list.size() == 0) {
+			return null;
+		}
+		
 		return list;
 	}
 

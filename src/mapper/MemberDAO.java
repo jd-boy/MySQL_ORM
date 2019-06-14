@@ -1,7 +1,6 @@
 package mapper;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import annotation.Delete;
 import annotation.Insert;
@@ -18,10 +17,10 @@ public interface MemberDAO {
 	public int insert(User user);
 	
 	@Select({"SELECT * FROM user WHERE id = #{id}"})
-	public LinkedList<User> select(@Param("id") int id);
+	public LinkedList<User> select(int id);
 	
 	@Update({"UPDATE user set age = #{age} WHERE id = #{id}"})
-	public int update(@Param("id") int id);
+	public int update(User user);
 	
 	@Delete({"DELETE FROM user WHERE id = #{id}"})
 	public int delete(@Param("id") int id);

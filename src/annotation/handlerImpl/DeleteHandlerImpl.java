@@ -25,7 +25,7 @@ public class DeleteHandlerImpl implements AnnotationHandler {
 			generateSqlUtil.closePreparedStatement();
 		}
 		
-		return null;
+		return -1;
 	}
 
 }
