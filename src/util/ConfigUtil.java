@@ -13,7 +13,7 @@ public class ConfigUtil {
 	public ConfigUtil() {
 		pro = new Properties();
 		try {
-			fileReader = new FileReader("pro");
+			fileReader = new FileReader("profile");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
