@@ -92,16 +92,12 @@ public class GenerateSqlUtil {
 						m.put(entry.getKey(), entry.getValue());
 					}
 				}
-			} else if(parameters.length == 1 && 
-					TypeUtil.isType(parameters[i].getParameterizedType()) < TypeUtil.TYPE_BASE) {
-				m.put(parameters[i].getName(), args[i]);
 			}
 		}
 		
 		int index = -1;
 		
 		for(Entry<String, Object> entry : m.entrySet()) {
-			
 			index = sql.indexOf("#{"+entry.getKey()+"}");
 			
 			if(index != -1) {

@@ -17,7 +17,7 @@ public interface MemberDAO {
 	public int insert(User user);
 	
 	@Select({"SELECT * FROM user WHERE id = #{id}"})
-	public LinkedList<User> select(int id);
+	public LinkedList<User> select(@Param("id") int id);
 	
 	@Update({"UPDATE user set age = #{age} WHERE id = #{id}"})
 	public int update(User user);

@@ -14,10 +14,10 @@ public class Test {
 		
 		//System.out.println(m.insert(u));
 		//System.out.println(m.update(u));
-		//System.out.println(m.delete(1));
-		for(User user : m.select(7)) {
+		//System.out.println(m.delete(u.getId()));
+		/*for(User user : m.select(7)) {
 			System.out.println(user.getName());
-		}
+		}*/
 		
 	}
 	

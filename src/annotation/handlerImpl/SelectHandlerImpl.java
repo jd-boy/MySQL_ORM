@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import annotation.handler.AnnotationHandler;
-import model.User;
 import util.GenerateSqlUtil;
 import util.ModelFieldUtil;
 import util.TypeUtil;
